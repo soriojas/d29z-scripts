@@ -33,13 +33,23 @@ local centerLabel = Screen:CreateElement('TextLabel', {
 })
 
 local labels = {}
+local oldLabels = {}
 while wait(0.2) do
-    local reading = LifeSensor:GetReading()
+    local reading = LifeSensor:GetReading()    
+    for playerName in pairs(reading) do
+        oldLabels[playerName] = nil
+    end    
+    for playerName in pairs(oldLabels) do
+        oldLabels[playerName]:Destroy()
+        oldLabels[playerName] = nil
+        labels[playerName] = nil
+    end
     for playerName, position in pairs(reading) do    
         if labels[playerName] then --if player exist
             labels[playerName]:ChangeProperties({ 
                 Position = UDim2.new(0.5, (position.x-x) * scale * screenSize.x/1000, 0.5, (position.z-z) * scale * screenSize.y/1000)
             })
+            oldLabels[playerName] = labels[playerName]
         else --add player
             Beep(0.2)
             local newLabel = Screen:CreateElement('TextLabel', {
