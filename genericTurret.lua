@@ -8,10 +8,7 @@ while wait() do
     if lifeforms[target] then
         local curPos = lifeforms[target]
         local displacement = curPos - prevPos
-        Gyro:PointAt(curPos+displacement*30) --11 to 13 good range for players
-        
+        Gyro:PointAt(curPos+displacement*18) --11 to 13 good range for players 18 for fast ships
         prevPos = curPos
-    else
-        print("notfound")
     end
 end
