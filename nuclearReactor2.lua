@@ -23,7 +23,7 @@ while wait(1) do
     elseif state == "refilling" then        
         for i=1,4 do TriggerPort(1) wait() end --eject depleted uranium
         Extractor:Configure({MaterialToExtract="Uranium"}) --mine uranium
-        wait(2)        
+        wait(3)        
         Extractor:Configure({MaterialToExtract="Coal"}) --dont mine uranium
         Disk:Write("State", "waiting") --start counting
     end
