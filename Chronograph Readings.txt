@@ -1,7 +1,7 @@
 Chronograph Readings
-80 stud barrel
+80 unit barrel
 
-1500 stud distance
+seconds to travel 1500 units
 0.6780099868774414
 0.6786189079284668
 0.637592077255249
