@@ -1,0 +1,15 @@
+@startjson
+{
+   "HasAtmosphere":"bool",
+   "SubType":"string",
+   "Color":"Color3",
+   "HasRings":"bool",
+   "<color:grey><i>RingsType": "<color:grey><i>string",
+   "<color:grey><i>AsteroidAmount": "<color:grey><i>int",
+   "Temperature":"number",
+   "Name":"string",
+   "Resources": {"#":"string"},
+   "TidallyLocked":"bool",
+   "Gravity":"number"
+} 
+@endjson
