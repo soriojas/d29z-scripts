@@ -147,8 +147,3 @@ secretText = enc.encrypt("Psst, Lua is cool!")
 plainText = dec.decrypt(secretText)
 
 print(plainText)
-
-local myValue = tostring(40~444444)
-print(myValue)
-
-print(#"poop")
