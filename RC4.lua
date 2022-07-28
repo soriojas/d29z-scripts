@@ -18,16 +18,16 @@ local function int(hex,base) --(string, int) Turns hex into an int.
 end
 
 local function zfill(bin_value, length) --this wont work. bin value is a table not a string.
-	local temp = value
-    if math.abs(length-#value) > 0 then
-        for i = 1, math.abs(length-#value) do
+	local temp = bin_value
+    if math.abs(length-#bin_value) > 0 then
+        for i = 1, math.abs(length-#bin_value) do
             temp = temp .. "0"
         end
     end
     return temp
 end
 
-local function xor(bin_value1, bin_value2)
+local function xor(bin_value1, bin_value2) --fix zfill first then fix this.
   local temp = ""
   for i = 1, #bin_value1 do
     local char1 = bin_value1:sub(i,i)
