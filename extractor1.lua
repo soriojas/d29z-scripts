@@ -1,5 +1,5 @@
 local Extractor = GetPartFromPort(1, "Extractor")
-local Ores = {"Quartz", "Silicon", "Stone", "Flint", "Ruby", "Sulfur", "Grass"}
+local Ores = {"Stone", "Flint", "Ruby", "Sulfur", "Grass", "Oil"}
 local index = 1
 while wait(2) do
     Extractor:Configure({MaterialToExtract=Ores[index]}) --do extractor things
