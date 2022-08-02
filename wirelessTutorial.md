@@ -1,4 +1,4 @@
-#TUTORIAL: WIRELESS PORTS
+# TUTORIAL: WIRELESS PORTS
 
 This short tutorial teches you how to make wireless ports. This is possible due to two things. Firstly, a callback function to a Triggered event has its first argument set to the part from which the trigger originated. Secondly, the GetPartFromPort() function can accept a Port instead of a PortID.
 
