@@ -22,8 +22,8 @@ end
 
 function dumpBodies()
     for key, value in StarMap:GetBodies() do
-        print(key) --coordinates
-        print(JSONEncode(value)) --type
+        print(key) --[[coordinates]]
+        print(JSONEncode(value)) --[[type]]
     end
 end
 
@@ -31,23 +31,5 @@ function dumpSystems()
     for key, value in StarMap:GetSystems() do
         print(key) --coordinates
         print(JSONEncode(value)) --type
-    end
-end
-
-local SectorA = { x = -78 , y = -83 }
-local SectorB = { x = -78 , y = -83 }
-
-for sx=SectorA.x, SectorB.x do
-    for sy=SectorA.y, SectorB.y do
-        for rx=-10,10 do
-            for ry=1,10 do
-                print(".")
-                Telescope:Configure({ViewCoordinates=sx..","..sy..","..rx..","..ry.."false"}) 
-                CoordinateInfo = Telescope:GetCoordinate()
-                dumpResources()
-                dumpInfo()
-                wait()
-            end
-        end
     end
 end
