@@ -32,9 +32,18 @@ function dumpSystems()
     end
 end
 
-local SectorA = { x = 0 , y = 0}
-local SectorB = { x = 0 , y = 0}
+local SectorA = { x = -88 , y = -74 }
+local SectorB = { x = -78 , y = -84 }
 
-for names = 1, 3 do
-    
+for sx=SectorA.x, SectorB.x do
+    for sy=SectorA.y, SectorB.y do
+        for rx=-10,10 do
+            for ry=1,10 do
+                Telescope:Configure({ViewCoordinates=sx..","..sy..","..rx..","..ry.."false"}) 
+                CoordinateInfo = Telescope:GetCoordinate()
+                dumpResources()
+                dumpInfo()
+            end
+        end
+    end
 end
