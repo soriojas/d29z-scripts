@@ -2,7 +2,8 @@ print("Begin Script")
 local StarMap = GetPartFromPort(1, "StarMap") -- methods: GetSystems()[], GetBodies()[]
 local Telescope = GetPartFromPort(1, "Telescope") -- methods: Signal WhenRegionLoads(), CoordinateInfo GetCoordinate(x1,y1,x2,y2)
 
-local CoordinateInfo = Telescope:GetCoordinate(-1,-74,-2,7)
+Telescope:Configure({ViewCoordinates="0, 0, 0, 0, false"}) 
+local CoordinateInfo = Telescope:GetCoordinate()
 
 function dumpInfo()
     for key, value in pairs(CoordinateInfo) do
@@ -18,12 +19,22 @@ function dumpResources()
 end
 
 function dumpBodies()
-    local StarMap = GetPartFromPort(1, "StarMap") 
     for key, value in StarMap:GetBodies() do
         print(key) --coordinates
         print(JSONEncode(value)) --type
     end
 end
 
-dumpBodies()
+function dumpSystems()
+    for key, value in StarMap:GetSystems() do
+        print(key) --coordinates
+        print(JSONEncode(value)) --type
+    end
+end
 
+local SectorA = { x = 0 , y = 0}
+local SectorB = { x = 0 , y = 0}
+
+for names = 1, 3 do
+    
+end
