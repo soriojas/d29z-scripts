@@ -13,8 +13,10 @@ function dumpInfo()
 end
 
 function dumpResources()
-    for index, value in pairs(CoordinateInfo["Resources"]) do
-        print(value)
+    if CoordinateInfo["Resources"] ~= nil then
+        for index, value in pairs(CoordinateInfo["Resources"]) do
+            print(value)
+        end        
     end
 end
 
@@ -32,17 +34,19 @@ function dumpSystems()
     end
 end
 
-local SectorA = { x = -88 , y = -74 }
-local SectorB = { x = -78 , y = -84 }
+local SectorA = { x = -78 , y = -83 }
+local SectorB = { x = -78 , y = -83 }
 
 for sx=SectorA.x, SectorB.x do
     for sy=SectorA.y, SectorB.y do
         for rx=-10,10 do
             for ry=1,10 do
+                print(".")
                 Telescope:Configure({ViewCoordinates=sx..","..sy..","..rx..","..ry.."false"}) 
                 CoordinateInfo = Telescope:GetCoordinate()
                 dumpResources()
                 dumpInfo()
+                wait()
             end
         end
     end
