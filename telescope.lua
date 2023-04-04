@@ -1,47 +1,67 @@
 print("Begin Script")
 local Telescope = GetPartFromPort(1, "Telescope") -- methods: Signal WhenRegionLoads(), CoordinateInfo GetCoordinate(x1,y1,x2,y2)
 
-Telescope:Configure({ViewCoordinates="0, 0, 0, 0, false"}) 
+Telescope:Configure({ViewCoordinates="-78, -93, 0, 0, false"})
 local CoordinateInfo = Telescope:GetCoordinate()
 
 function dumpInfo()
+    local temp = ""
     for key, value in pairs(CoordinateInfo) do
-        print(key)
-        print(value)
+        temp = temp..", "..key..":"..tostring(value)
     end
+    print(temp)
 end
 
 function dumpResources()
     if CoordinateInfo["Resources"] ~= nil then
+        local temp = ""
+        local tbl = {}
+        local count = 0 --# of unique resources
         for index, value in pairs(CoordinateInfo["Resources"]) do
-            print(value)
-        end        
-        dumpInfo()
+            temp = temp..", "..value
+            if tbl[value] == nil then
+                count = count + 1
+            end
+            tbl[value]=value
+        end
+        print(count.. temp)
+        return true
     end
 end
 
-local SectorA = { x = -78 , y = -83 }
-local SectorB = { x = -78 , y = -83 }
 
-for sx=SectorA.x, SectorB.x do
-    for sy=SectorA.y, SectorB.y do
+
+-- local SectorA = { x = 22 , y = 17 }
+-- local SectorB = { x = -99 , y = -99 }
+
+local SectorA = { x = -48, y = 24 }
+local SectorB = { x = SectorA.x , y = SectorA.y }
+
+for sx=SectorA.x, SectorB.x,-1 do
+    for sy=SectorA.y, SectorB.y,-1 do
         for rx=-10,10 do
-            for ry=1,10 do
-                print(".")
-                Telescope:Configure({ViewCoordinates=sx..","..sy..","..rx..","..ry.."false"}) 
+            for ry=-10,10 do
+                Telescope:Configure({ViewCoordinates=sx..","..sy..","..rx..","..ry.."false"})
                 CoordinateInfo = Telescope:GetCoordinate()
-                dumpResources()
-                wait()
+                if dumpResources() then
+                    print(sx..","..sy..","..rx..","..ry)
+                    dumpInfo()
+                end
             end
+            wait()
         end
     end
 end
 
 
+print("End Script")
 
---"35, -35, 5, -7, false"
---- 1,-74,-2,7
 
+
+--[[
+35,-35,5,-7
+1,-74,-2,7
+]]
 
 
 
