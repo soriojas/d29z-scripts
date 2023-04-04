@@ -2,7 +2,7 @@ print("Begin Script")
 local Telescope = GetPartFromPort(1, "Telescope") --[[ 
     methods: Signal WhenRegionLoads() waits for data to load, CoordinateInfo GetCoordinate(x1,y1,x2,y2) 
 ]]
-Telescope:Configure({ViewCoordinates="35, -35, 5, -7, false"})
+Telescope:Configure({ViewCoordinates="35, -35, 5, -7, false"}) --"35, -35, 5, -7, false"
 local CoordinateInfo = Telescope:GetCoordinate()
 
 function dumpInfo() --prints data about a planet
