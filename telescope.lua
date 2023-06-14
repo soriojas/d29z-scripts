@@ -29,10 +29,7 @@ function dumpResources()
     end
 end
 
-
-
--- local SectorA = { x = 22 , y = 17 }
--- local SectorB = { x = -99 , y = -99 }
+--    bugs: server returns duplicate keys or no keys at all. can be fixed over time or by calling GetCoordinate() 2 or 3 times.
 
 local SectorA = { x = -48, y = 24 }
 local SectorB = { x = SectorA.x , y = SectorA.y }
