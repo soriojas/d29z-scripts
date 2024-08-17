@@ -2,9 +2,10 @@ local keyboard = GetPartFromPort(1, "Keyboard")
 local miningLaser = GetPartFromPort(1, "MiningLaser")
 local gyro = GetPartFromPort(1, "Gyro")
 
-beep(1)
 keyboard:Connect("TextInputted", function(text) --only works on ore deposits
+    Beep(0.5)
+    text = text:sub(1, -2) --removes the space at the end that we didn't put there
     miningLaser:Configure({MaterialToExtract=text})
     gyro:Configure({Seek="Radar "..text.."Deposit"})
-    GetPort(2):Trigger() --turn off micro
+    TriggerPort(2) --turn off micro
 end)
