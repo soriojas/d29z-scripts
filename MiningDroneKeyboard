@@ -1,0 +1,10 @@
+local keyboard = GetPartFromPort(1, "Keyboard") 
+local miningLaser = GetPartFromPort(1, "MiningLaser")
+local gyro = GetPartFromPort(1, "Gyro")
+
+beep(1)
+keyboard:Connect("TextInputted", function(text) --only works on ore deposits
+    miningLaser:Configure({MaterialToExtract=text})
+    gyro:Configure({Seek="Radar "..text.."Deposit"})
+    GetPort(2):Trigger() --turn off micro
+end)
