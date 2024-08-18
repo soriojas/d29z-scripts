@@ -1,4 +1,6 @@
-encode = coroutine.create(function(frequency)
+--hypothetical garbage. doesn't do anything.
+
+toastbread = coroutine.create(function(frequency)
     local finalTime = frequency*8
 	initialTime = tick()
 	local deltaTime=tick()-initialTime
@@ -10,17 +12,48 @@ encode = coroutine.create(function(frequency)
 	print("Bread is ready!")
 end)
 
-while wait() do 
-	coroutine.resume(encode, 0.2)
-end
+sequence = {0, 0, 0, 0, 0, 0, 0, 0}
 
-GetPort(1):Connect("Triggered", callback)
-
-co = coroutine.create(function ()
+encode = coroutine.create(function ()
     local initialTime = tick()
 	local deltaTime=tick()-initialTime
-    for i=0,8,deltaTime do
-      --do something
-      coroutine.yield()
+    for i=0.001,8,deltaTime do
+    	sequence
+		coroutine.yield()
     end
-  end)
+end)
+
+local connection = GetPort(1):Connect("Triggered", callback)
+
+function callback()
+	connection:Unbind()
+	connection = GetPort(1):Connect("Triggered", function ()
+		sequence[i]=1
+	end)	
+	while coroutine.resume(encode) do
+
+	end
+end
+
+
+function ioRead() --frequency is 1Hz
+	local connection
+	local sequence = {0, 0, 0, 0, 0, 0, 0, 0}
+
+	function one(i)
+		sequence[math.ceil(i)]=1
+	end
+
+	local iT = tick()
+	local dT=tick()-iT
+	for i=0.001,8,dT do
+		connection = GetPort(1):Connect("Triggered", one(i)) 
+		--connects Port 1's "Triggered" event to function "one()"
+		dT=tick()-iT
+		wait()
+	end
+	connection:Unbind() --disconnects the event
+
+	return sequence
+end
+
