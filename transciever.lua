@@ -7,7 +7,8 @@ function demodulate(port,frequency)
 		byte = bit32.replace(byte,1,math.ceil(t/frequency-1),1)
 	end) 
 
-	while t <= 8*frequency do
+	while t <= 8 * frequency do
+		t = t + frequency
 		wait(frequency)
 	end
 
