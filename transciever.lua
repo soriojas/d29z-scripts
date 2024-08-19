@@ -23,3 +23,9 @@ function modulate(port,frequency,byte)
 		wait(frequency)
 	end
 end
+
+--[[
+hasn't been tested
+
+encode with string.byte(string) and decode with string.char(byte)
+]]
