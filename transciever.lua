@@ -1,8 +1,6 @@
 function demodulate(port,frequency)
 	local connection
 	local byte = 0 --NUL, 0000 0000
-	local initialTime = tick()
-	local deltaTime = tick()-initialTime
 	local t = "1e-14"
 
 	connection = port:Connect("Triggered", function()
@@ -10,9 +8,7 @@ function demodulate(port,frequency)
 	end) 
 
 	while t <= 8*frequency do
-		t = t + deltaTime
-		wait()
-        deltaTime = tick()-initialTime
+		wait(frequency)
 	end
 
 	connection:Unbind()
