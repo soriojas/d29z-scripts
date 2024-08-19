@@ -14,3 +14,12 @@ function demodulate(port,frequency)
 	end
 	return byte
 end
+
+function modulate(port,frequency,byte)
+	for i=0,7 do
+		if bit32.extract(byte,i,1) == 1 then
+			TriggerPort(port)
+		end
+		wait(frequency)
+	end
+end
