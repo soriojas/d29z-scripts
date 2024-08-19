@@ -2,16 +2,21 @@ function demodulate(port,frequency)
 	local connection
 	local byte = 0 --NUL, 0000 0000
 
+	connection = port:Connect("Triggered", function()
+		byte = bit32.replace(byte,1,math.ceil(t/frequency-1),1)
+	end) 
+
 	local initialTime = tick()
 	local deltaTime = tick()-initialTime
-	for i="1e-14",8*frequency,deltaTime do
-		connection = port:Connect("Triggered", function()
-            byte = bit32.replace(byte,1,math.ceil(i/frequency-1),1)
-        end) 
+	local t = "1e-14"
+	while t <= 8*frequency do
+		t = t + deltaTime
 		wait()
         deltaTime = tick()-initialTime
-        connection:Unbind()
 	end
+
+	connection:Unbind()
+
 	return byte
 end
 
