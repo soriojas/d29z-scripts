@@ -1,15 +1,18 @@
+for i=1,10 do print() end
 print("Begin Script")
 local Telescope = GetPartFromPort(1, "Telescope") -- methods: Signal WhenRegionLoads(), CoordinateInfo GetCoordinate(x1,y1,x2,y2)
 
-Telescope:Configure({ViewCoordinates="-78, -93, 0, 0, false"})
+Telescope:Configure({ViewCoordinates="0, 0, 0, 0, false"})
 local CoordinateInfo = Telescope:GetCoordinate()
 
 function dumpInfo()
     local temp = ""
     for key, value in pairs(CoordinateInfo) do
-        temp = temp..", "..key..":"..tostring(value)
+        if key ~= "Resources" then
+            temp = temp..", "..key..":"..tostring(value)
+        end
     end
-    print(temp)
+    return temp
 end
 
 function dumpResources()
@@ -24,32 +27,35 @@ function dumpResources()
             end
             tbl[value]=value
         end
-        print(count.. temp)
-        return true
+        return count.. temp
     end
 end
 
 --    bugs: server returns duplicate keys or no keys at all. can be fixed over time or by calling GetCoordinate() 2 or 3 times.
 
-local SectorA = { x = -48, y = 24 }
-local SectorB = { x = SectorA.x , y = SectorA.y }
+local SectorA = { x = 10, y = 70 }
+local SectorB = { x = 7 , y = 68 }
 
 for sx=SectorA.x, SectorB.x,-1 do
     for sy=SectorA.y, SectorB.y,-1 do
         for rx=-10,10 do
             for ry=-10,10 do
-                Telescope:Configure({ViewCoordinates=sx..","..sy..","..rx..","..ry.."false"})
+                currentCoords= sx..","..sy..","..rx..","..ry..", false"
+                Telescope:Configure({ViewCoordinates= currentCoords})
                 CoordinateInfo = Telescope:GetCoordinate()
-                if dumpResources() then
-                    print(sx..","..sy..","..rx..","..ry)
-                    dumpInfo()
+                local temp = dumpResources()
+                if temp ~= nil then
+                    print(sx..","..sy..","..rx..","..(ry-1).."\n"..dumpInfo().."\n"..temp)
                 end
+                wait()
             end
-            wait()
         end
     end
 end
 
+-- Telescope:Configure({ViewCoordinates= "7,70,-4,-5,false"})
+-- CoordinateInfo = Telescope:GetCoordinate()
+-- print(dumpInfo())
 
 print("End Script")
 
@@ -59,7 +65,6 @@ print("End Script")
 35,-35,5,-7
 1,-74,-2,7
 ]]
-
 
 
 
