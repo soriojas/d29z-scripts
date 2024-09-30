@@ -43,8 +43,8 @@ for sx=SectorA.x, SectorB.x,-1 do
                 currentCoords= sx..","..sy..","..rx..","..ry..", false"
                 Telescope:Configure({ViewCoordinates= currentCoords})
                 CoordinateInfo = Telescope:GetCoordinate()
-                local temp = dumpResources()
-                if temp ~= nil then
+                local resources = dumpResources()
+                if resources ~= nil then
                     print(sx..","..sy..","..rx..","..(ry-1).."\n"..dumpInfo().."\n"..temp)
                 end
                 wait()
